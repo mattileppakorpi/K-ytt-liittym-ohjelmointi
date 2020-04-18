@@ -7,16 +7,31 @@
         mc:Ignorable="d"
         Title="Leikkipaikat" Height="450" Width="800">
     <Grid>
-        <StackPanel>
-            <Button x:Name="btnGetPlaygrounds" Content="Hae Leikkipaikat" Click="btnGetPlaygrounds_Click"></Button>
-            
-        <StackPanel Orientation="Horizontal">
-            <DataGrid x:Name="dgPlaygrounds" MinWidth="100" ></DataGrid>
+
+        <DockPanel LastChildFill="True">
+            <StackPanel DockPanel.Dock="Left" Background="DarkCyan" HorizontalAlignment="Left">
+            <Button x:Name="btnGetPlaygrounds" Content="Hae Leikkipaikat" Click="btnGetPlaygrounds_Click" Margin=" 5"></Button>
+            <Button x:Name="btnAddPlaygrounds" Content="Lisää kohde" Margin=" 5"></Button>
+            <Button x:Name="btnModify" Content="Muokkaa" Margin=" 5"></Button>
+                <TextBlock>Osoite:</TextBlock>
+                <TextBox x:Name="txtAddress"></TextBox>
+                <TextBlock>Info:</TextBlock>
+                <TextBox x:Name="txtInfo"></TextBox>
+                <TextBlock>Väline:</TextBlock>
+                <TextBox x:Name="txtEquipment"></TextBox>
+                <TextBlock>Merkki:</TextBlock>
+                <TextBox x:Name="txtBrand"></TextBox>
+                <TextBlock>Vika:</TextBlock>
+                <TextBox x:Name="txtFault"></TextBox>
+                <Button x:Name="btnAdd" Content="Tallenna" Margin="10" Click="btnAdd_Click" />
+            </StackPanel>
+        <StackPanel Orientation="Horizontal" Background="Azure">
+            <DataGrid x:Name="dgPlaygrounds" ItemsSource="{Binding}" MinWidth="100" ></DataGrid>
             <DataGrid x:Name="dgInfo" MinWidth="100"></DataGrid>
             <DataGrid x:Name="dgEquipment" MinWidth="100"></DataGrid>
             <DataGrid x:Name="dgFaults" MinWidth="100"></DataGrid>
             
         </StackPanel>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>
