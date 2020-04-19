@@ -11,27 +11,47 @@
         <DockPanel LastChildFill="True">
             <StackPanel DockPanel.Dock="Left" Background="DarkCyan" HorizontalAlignment="Left">
             <Button x:Name="btnGetPlaygrounds" Content="Hae Leikkipaikat" Click="btnGetPlaygrounds_Click" Margin=" 5"></Button>
-            <Button x:Name="btnAddPlaygrounds" Content="Lisää kohde" Margin=" 5"></Button>
-            <Button x:Name="btnModify" Content="Muokkaa" Margin=" 5"></Button>
-                <TextBlock>Osoite:</TextBlock>
-                <TextBox x:Name="txtAddress"></TextBox>
-                <TextBlock>Info:</TextBlock>
-                <TextBox x:Name="txtInfo"></TextBox>
-                <TextBlock>Väline:</TextBlock>
-                <TextBox x:Name="txtEquipment"></TextBox>
-                <TextBlock>Merkki:</TextBlock>
-                <TextBox x:Name="txtBrand"></TextBox>
-                <TextBlock>Vika:</TextBlock>
-                <TextBox x:Name="txtFault"></TextBox>
-                <Button x:Name="btnAdd" Content="Tallenna" Margin="10" Click="btnAdd_Click" />
+            <Button x:Name="btnAddPlaygrounds" Content="Lisää kohde" Margin=" 5" Click="btnAddPlaygrounds_Click"></Button>
+            
+                <Button x:Name="btnDelPlayground" Content="Poista kohde" Margin=" 5" Click="btnDelPlayground_Click"></Button>
+                <TextBlock  Margin="5">Osoite:</TextBlock>
+                <TextBox x:Name="txtAddress"  Margin="5"></TextBox>
+                <TextBlock  Margin="5">Info:</TextBlock>
+                <TextBox x:Name="txtInfo"  Margin="5"></TextBox>
+                <Button x:Name="btnAdd" Content="Tallenna" Margin="10"  />
             </StackPanel>
         <StackPanel Orientation="Horizontal" Background="Azure">
-            <DataGrid x:Name="dgPlaygrounds" ItemsSource="{Binding}" MinWidth="100" ></DataGrid>
-            <DataGrid x:Name="dgInfo" MinWidth="100"></DataGrid>
-            <DataGrid x:Name="dgEquipment" MinWidth="100"></DataGrid>
-            <DataGrid x:Name="dgFaults" MinWidth="100"></DataGrid>
-            
-        </StackPanel>
+                <StackPanel Background="CadetBlue">
+                    <TextBlock Margin="5">Kohteet:</TextBlock>
+                    <DataGrid x:Name="dgPlaygrounds" ItemsSource="{Binding}" MinWidth="150" SelectionChanged="dgPlaygrounds_SelectionChanged" />
+                </StackPanel>
+                <StackPanel Background="CornflowerBlue">
+                    <Button x:Name="btnModify" Content="Muokkaa tietoja" Margin=" 5" Click="btnModify_Click"></Button>
+                    <TextBlock  Margin="5">Kohteen tiedot:</TextBlock>
+                    <DataGrid x:Name="dgInfo" MinWidth="150"  ></DataGrid>
+                </StackPanel>
+                <StackPanel Background="BlueViolet">
+                    <Button x:Name="btnAddEquipment" Content="Lisää väline" Margin=" 5" Click="btnAddEquipment_Click"></Button>
+                    <Button x:Name="btnDelEquipment" Content="Poista valittu väline" Margin=" 5" Click="btnDelEquipment_Click"></Button>
+                    <TextBlock  Margin="5">Väline:</TextBlock>
+                    <TextBox x:Name="txtEquipment"  Margin="5"></TextBox>
+                    <TextBlock  Margin="5">Valmistaja:</TextBlock>
+                    <TextBox x:Name="txtBrand"  Margin="5"></TextBox>
+                    <Separator BorderThickness="10" BorderBrush="Black" Margin="10"></Separator>
+                    <TextBlock  Margin="5">Kohteen välineet:</TextBlock>
+                <DataGrid x:Name="dgEquipment" MinWidth="150" SelectionChanged="dgEquipment_SelectionChanged"  ></DataGrid>
+                </StackPanel>
+                <StackPanel Background="DarkOliveGreen">
+                    <Button x:Name="btnAddFault" Content="Lisää vika" Margin=" 5" Click="btnAddFault_Click"></Button>
+                    <Button x:Name="btnDelFault" Content="Poista valittu vika" Margin=" 5" Click="btnDelFault_Click"></Button>
+                    <TextBlock  Margin="5">Vika:</TextBlock>
+                    <TextBox x:Name="txtFault"  Margin="5"></TextBox>
+                    <Separator BorderThickness="10" BorderBrush="Black" Margin="10"></Separator>
+                    <TextBlock  Margin="5">Välineen viat:</TextBlock>
+                <DataGrid x:Name="dgFaults" MinWidth="150" ></DataGrid>
+                </StackPanel>
+
+            </StackPanel>
         </DockPanel>
     </Grid>
 </Window>
