@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
+using LiteDB;
 
 namespace Leikkipaikat
 {
@@ -21,7 +22,7 @@ namespace Leikkipaikat
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static string originalAddress = "";
+        //private static string originalAddress = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -48,9 +49,11 @@ namespace Leikkipaikat
         {
             try
             {
+                if (txtAddress.Text != null) { 
                 //Lisätään uusi kohde, tiedot tekstikentistä osoite ja info. Toisella rivillä päivitetään datagridi.
                 Leikkipaikat.DB.AddPlayground(txtAddress.Text, txtInfo.Text);
                 dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds();
+                }
             }
             catch (Exception)
             {
@@ -60,19 +63,15 @@ namespace Leikkipaikat
         }
         private void btnDelPlayground_Click(object sender, RoutedEventArgs e)
         {
-            try
+            
             {
                 //Poistetaan datagridistä valittu kohde. Viimeisellä rivillä taas päivitetään.
-                string chosen = dgPlaygrounds.SelectedItem.ToString();
-                Leikkipaikat.DB.DeletePlayground(chosen);
+                Playground playground = (Playground)dgPlaygrounds.SelectedItem;
+                Leikkipaikat.DB.DeletePlayground(playground);
 
                 dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds();
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            
 
         }
 
@@ -100,66 +99,65 @@ namespace Leikkipaikat
         private void dgPlaygrounds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Valitun kohteen tiedot menevät osoite- ja info-kenttiin. Näin kohdetta voi muokata halutessa.
-            int i = dgPlaygrounds.SelectedIndex;
-            if (i > -1)
-            {
-                var dt = (DataTable)dgPlaygrounds.DataContext;
-                DataRow dr = dt.Rows[i];
-                originalAddress = dr[0].ToString();
-                txtAddress.Text = dr[0].ToString();
-                txtInfo.Text = dr[1].ToString();
+            Playground chosen = (Playground)dgPlaygrounds.SelectedItem;
 
-                //Valitun kohteen info näytetään dgInfo-datagridissä ja välineet gdEquipment-datagridissä.
-                Playground playground = (Playground)dgPlaygrounds.SelectedItem;
-                dgEquipment.DataContext = playground.Equipment;
-                dgInfo.DataContext = playground.Info;
+            if (chosen != null)
+            {
+                txtAddress.Text = chosen.Address;
+                txtInfo.Text = chosen.Info;
+
+
+                //Valitun kohteen info näytetään myös txtInfo2-kentässä ja välineet gdEquipment-datagridissä.
+
+                dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(chosen);
+                txtInfo2.Text = chosen.Info;
+            }
+            else //jos ei valintaa ole kentät tyhjenevät
+            {
+                txtAddress.Text = "";
+                txtInfo.Text = "";
+                txtInfo2.Text = "";
             }
         }
         private void dgEquipment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //dgequipment-kentän valitun välineen viat menevät dgFaults-datagridiin.
             Equipment equipment = (Equipment)dgEquipment.SelectedItem;
-            dgFaults.DataContext = equipment.Faults;
+            if (equipment != null)
+            {
+                dgFaults.DataContext = equipment.Faults;
+            }
         }
 
         private void btnAddEquipment_Click(object sender, RoutedEventArgs e)
         {
             //Lisätään valitulle kohteelle väline, tiedot txtequipment ja txtbrand-kentistä.
-            try
-            {
+            
                 Equipment equipment = new Equipment();
+            if (txtEquipment.Text != null) { 
                 equipment.Name = txtEquipment.Text;
                 equipment.Brand = txtBrand.Text;
                 Playground selected = (Playground)dgPlaygrounds.SelectedItem;
                 Leikkipaikat.DB.AddEquipment(selected, equipment);
-
-               
+            dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(selected);
             }
-            catch (Exception)
-            {
 
-                throw;
-            }
 
         }
 
         private void btnDelEquipment_Click(object sender, RoutedEventArgs e)
         {
             //Poistetaan valitun kohteen valittu väline.
-            try
-            {
+            
+            
                 Playground selected = (Playground)dgPlaygrounds.SelectedItem;
                 Equipment equipment = (Equipment)dgEquipment.SelectedItem;
 
                 Leikkipaikat.DB.DelEquipment(selected, equipment);
+            dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(selected);
 
-                
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
+
         }
 
         private void btnAddFault_Click(object sender, RoutedEventArgs e)

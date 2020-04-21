@@ -9,7 +9,7 @@
     <Grid>
 
         <DockPanel LastChildFill="True">
-            <StackPanel DockPanel.Dock="Left" Background="DarkCyan" HorizontalAlignment="Left">
+            <StackPanel DockPanel.Dock="Left" Background="DarkCyan" HorizontalAlignment="Left" Width="140">
             <Button x:Name="btnGetPlaygrounds" Content="Hae Leikkipaikat" Click="btnGetPlaygrounds_Click" Margin=" 5"></Button>
             <Button x:Name="btnAddPlaygrounds" Content="Lisää kohde" Margin=" 5" Click="btnAddPlaygrounds_Click"></Button>
             
@@ -17,20 +17,24 @@
                 <TextBlock  Margin="5">Osoite:</TextBlock>
                 <TextBox x:Name="txtAddress"  Margin="5"></TextBox>
                 <TextBlock  Margin="5">Info:</TextBlock>
-                <TextBox x:Name="txtInfo"  Margin="5"></TextBox>
+                <TextBox x:Name="txtInfo"  Margin="5" Height=" 140" MaxWidth="135" TextWrapping="Wrap"></TextBox>
                 <Button x:Name="btnAdd" Content="Tallenna" Margin="10"  />
             </StackPanel>
         <StackPanel Orientation="Horizontal" Background="Azure">
-                <StackPanel Background="CadetBlue">
+                <StackPanel Background="CadetBlue" Width="140">
                     <TextBlock Margin="5">Kohteet:</TextBlock>
-                    <DataGrid x:Name="dgPlaygrounds" ItemsSource="{Binding}" MinWidth="150" SelectionChanged="dgPlaygrounds_SelectionChanged" />
+                    <DataGrid x:Name="dgPlaygrounds" ItemsSource="{Binding}" MinWidth="150" AutoGenerateColumns="False" SelectionChanged="dgPlaygrounds_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Osoite" Binding="{Binding Address}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
-                <StackPanel Background="CornflowerBlue">
+                <StackPanel Background="CornflowerBlue" Width=" 140">
                     <Button x:Name="btnModify" Content="Muokkaa tietoja" Margin=" 5" Click="btnModify_Click"></Button>
                     <TextBlock  Margin="5">Kohteen tiedot:</TextBlock>
-                    <DataGrid x:Name="dgInfo" MinWidth="150"  ></DataGrid>
+                    <TextBlock x:Name="txtInfo2" Margin=" 5" MaxWidth="135" TextWrapping="Wrap"></TextBlock>
                 </StackPanel>
-                <StackPanel Background="BlueViolet">
+                <StackPanel Background="BlueViolet" Width="160">
                     <Button x:Name="btnAddEquipment" Content="Lisää väline" Margin=" 5" Click="btnAddEquipment_Click"></Button>
                     <Button x:Name="btnDelEquipment" Content="Poista valittu väline" Margin=" 5" Click="btnDelEquipment_Click"></Button>
                     <TextBlock  Margin="5">Väline:</TextBlock>
@@ -41,7 +45,7 @@
                     <TextBlock  Margin="5">Kohteen välineet:</TextBlock>
                 <DataGrid x:Name="dgEquipment" MinWidth="150" SelectionChanged="dgEquipment_SelectionChanged"  ></DataGrid>
                 </StackPanel>
-                <StackPanel Background="DarkOliveGreen">
+                <StackPanel Background="DarkOliveGreen" Width="200">
                     <Button x:Name="btnAddFault" Content="Lisää vika" Margin=" 5" Click="btnAddFault_Click"></Button>
                     <Button x:Name="btnDelFault" Content="Poista valittu vika" Margin=" 5" Click="btnDelFault_Click"></Button>
                     <TextBlock  Margin="5">Vika:</TextBlock>
