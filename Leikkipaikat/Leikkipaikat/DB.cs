@@ -62,21 +62,27 @@ namespace Leikkipaikat
             }
            
         }
-        public static bool AddPlayground(string address, string info)
+        public static string AddPlayground(string address, string info)
         {
             //Lisätään tietokantaan kohde.
             try
             {
-
+                
                 var playground = new Playground{Address = address,Info = info};
                 using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
+                    var result = col.FindOne(x => x.Address.Equals(address));
+                    if (result == null) { 
                     col.Insert(playground);
+                        return "Lisätty";
+                    }
+                    
+                    else { return "Osoite on jo tietokannassa"; }
                 }
 
 
-                return true;
+               
                 
             }
             catch (Exception)
@@ -138,30 +144,37 @@ namespace Leikkipaikat
                 throw;
             }
         }
-        public static bool AddEquipment(Playground playground, Equipment equipment)
+        public static string AddEquipment(Playground playground, Equipment equipment)
         {
             //Lisätään valittuun kohteeseen tietokantaan väline.
             
                 string name = playground.Address;
-
-                using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
+            string equipmentName = equipment.Name;
+            string info = "";
+            using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
                     var result = col.FindOne(x => x.Address.Equals(name));
-                    if (result.Equipment == null) { result.Equipment = new List<Equipment>(); }
-                    if(result == null)
-                    {
-                        throw new Exception("Error");
-                    }
-                    else {
-                    //Playground playground1 = (Playground)result;
-                    result.Equipment.Add(equipment);
-                    col.Update(result);
-                    }
-
+                if (result.Equipment == null)//Jos ei välineitä vielä ole
+                {
+                    result.Equipment = new List<Equipment>();
+                }//tarkistetaan ettei tule saman nimistä laitetta
+                var item = result.Equipment.SingleOrDefault(x => x.Name == equipmentName);
+                    if (item != null)
+                {
+                     info = "Saman niminen laite on jo olemassa";
                 }
-                return true;
-            
+                else
+                {
+                    result.Equipment.Add(equipment);//lisätään listalle
+                    col.Update(result);//Tallennetaan tietokantaan
+                    info = "Laite lisätty";
+                }
+                return info;
+
+                
+                }
+          
         }
         public static bool DelEquipment(Playground playground, Equipment equipment)
         {
@@ -188,62 +201,74 @@ namespace Leikkipaikat
             
         }
 
-        public static bool AddFault(Playground playground, Equipment equipment, string fault)
+        public static string AddFault(Playground playground, Equipment equipment, string fault)
         {
             //Lisätään tietyn kohteen tiettyyn välineeseen vika
-            try
-            {
-                //equipment.Faults.Add(fault);
+
+            
+                string name = playground.Address;
+                string equipmentName = equipment.Name;
+                string info = "";
                 using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
-                    List<Playground> playgrounds = new List<Playground>();
-                    playgrounds = (List<Playground>)col;
-                    foreach (var item in playgrounds)
+                    var result = col.FindOne(x => x.Address.Equals(name));
+
+                foreach (var item in result.Equipment)
+                {
+                    if (item.Name.Equals(equipmentName)) 
+                       
                     {
-                        if (playground.Address.Equals(item.Address))
+                        if (item.Faults == null) { item.Faults = new List<string>(); }
+                        var z = item.Faults.SingleOrDefault(x => x == fault);
+                        if (z != null)
+                        {
+                           info=  "Saman niminen vika on jo olemassa";
+                        }
+                        
+                        else {
+                            item.Faults.Add(fault);
+                            col.Update(result);
+                            info = "Vika lisätty";
                             
-                            foreach (var item2 in item.Equipment)
-                            {
-                                if (item2.Name.Equals(item2.Name))
-                                    item2.Faults.Add(fault);
-                            }
-                        col.Update(item);
-
+                        }
                     }
-
+                
                 }
-                return true;
-            }
-            catch (Exception)
-            {
+                return info;
 
-                throw;
+
+
             }
+                
+
+               
+            
         }
         public static bool DelFault(Playground playground, Equipment equipment, string fault)
         {
             //Poistetaan tietyn kohteen tietystä välineestä vika
             try
             {
-                //equipment.Faults.Remove(fault);
+                string name = playground.Address;
+                string equipmentName = equipment.Name;
+
                 using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
-                    List<Playground> playgrounds = new List<Playground>();
-                    playgrounds = (List<Playground>)col;
-                    foreach (var item in playgrounds)
-                    {
-                        if (playground.Address.Equals(item.Address))
+                    var result = col.FindOne(x => x.Address.Equals(name));
+                    var item = result.Equipment.SingleOrDefault(x => x.Name == equipmentName);
+                    string f = item.Faults.SingleOrDefault(x => x == fault);
+                   
 
-                            foreach (var item2 in item.Equipment)
-                            {
-                                if (item2.Name.Equals(item2.Name))
-                                    item2.Faults.Remove(fault);
-                            }
-                        col.Update(item);
-
+                    if (f != null)
+                    { 
+                        item.Faults.Remove(f);
                     }
+                    var copy = item;
+                    result.Equipment.Remove(item);
+                    result.Equipment.Add(copy);
+                    col.Update(result);
 
                 }
                 return true;

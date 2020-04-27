@@ -51,9 +51,11 @@ namespace Leikkipaikat
             {
                 if (txtAddress.Text != null) { 
                 //Lisätään uusi kohde, tiedot tekstikentistä osoite ja info. Toisella rivillä päivitetään datagridi.
-                Leikkipaikat.DB.AddPlayground(txtAddress.Text, txtInfo.Text);
+                string info = Leikkipaikat.DB.AddPlayground(txtAddress.Text, txtInfo.Text);
                 dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds();
+                    MessageBox.Show(info);
                 }
+                
             }
             catch (Exception)
             {
@@ -99,6 +101,7 @@ namespace Leikkipaikat
         private void dgPlaygrounds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Valitun kohteen tiedot menevät osoite- ja info-kenttiin. Näin kohdetta voi muokata halutessa.
+            if (dgPlaygrounds.SelectedItem != null) { 
             Playground chosen = (Playground)dgPlaygrounds.SelectedItem;
 
             if (chosen != null)
@@ -118,15 +121,18 @@ namespace Leikkipaikat
                 txtInfo.Text = "";
                 txtInfo2.Text = "";
             }
+            }
         }
         private void dgEquipment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //dgequipment-kentän valitun välineen viat menevät dgFaults-datagridiin.
-            Equipment equipment = (Equipment)dgEquipment.SelectedItem;
-            if (equipment != null)
-            {
-                dgFaults.DataContext = equipment.Faults;
+            if (dgEquipment.SelectedItem != null)
+            { Object selected = (Object)dgEquipment.SelectedItem;//tyhjä valinta pistää sekaisin edelleen
+                
+            Equipment equipment = (Equipment)selected;
+                lbFaults.ItemsSource = equipment.Faults;
             }
+            
         }
 
         private void btnAddEquipment_Click(object sender, RoutedEventArgs e)
@@ -134,13 +140,16 @@ namespace Leikkipaikat
             //Lisätään valitulle kohteelle väline, tiedot txtequipment ja txtbrand-kentistä.
             
                 Equipment equipment = new Equipment();
-            if (txtEquipment.Text != null) { 
+            if (txtEquipment.Text != null)
+            { 
                 equipment.Name = txtEquipment.Text;
                 equipment.Brand = txtBrand.Text;
                 Playground selected = (Playground)dgPlaygrounds.SelectedItem;
-                Leikkipaikat.DB.AddEquipment(selected, equipment);
-            dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(selected);
+                string info= Leikkipaikat.DB.AddEquipment(selected, equipment);
+                dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(selected);
+                MessageBox.Show(info);
             }
+            else { MessageBox.Show("Välineen nimi puuttuu"); }
 
 
         }
@@ -163,38 +172,39 @@ namespace Leikkipaikat
         private void btnAddFault_Click(object sender, RoutedEventArgs e)
         {
             //Lisätään vika valitun kohteen valittuun välineeseen. Vika txtFault-kentästä.
-            try
-            {
+            
+            
                 Playground selected = (Playground)dgPlaygrounds.SelectedItem;
                 Equipment equipment = (Equipment)dgEquipment.SelectedItem;
                 string fault = txtFault.Text;
-                Leikkipaikat.DB.AddFault(selected, equipment, fault);
-
-                
+            if (txtFault.Text != null)
+            { 
+                lbFaults.ItemsSource = null;//Leikkipaikat.DB.AddFault(selected, equipment, fault);
+                MessageBox.Show( Leikkipaikat.DB.AddFault(selected, equipment, fault));
+                lbFaults.ItemsSource = equipment.Faults;
             }
-            catch (Exception)
-            {
+            else { MessageBox.Show("Vian nimi puuttuu"); }
 
-                throw;
-            }
+
+
+
         }
 
         private void btnDelFault_Click(object sender, RoutedEventArgs e)
         {
             //Poistetaan valittu vika valitun kohteen valitusta välineestä.
-            try
-            {
+            
+            
                 Playground selected = (Playground)dgPlaygrounds.SelectedItem;
                 Equipment equipment = (Equipment)dgEquipment.SelectedItem;
-                string fault = dgFaults.SelectedItem.ToString();
-                Leikkipaikat.DB.DelFault(selected, equipment, fault);
+                string fault = lbFaults.SelectedItem.ToString();
+                 lbFaults.ItemsSource = null;
+                 Leikkipaikat.DB.DelFault(selected, equipment, fault);
+               
+                lbFaults.ItemsSource = equipment.Faults; //Ei päivity!
 
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
+
         }
     }
 }
