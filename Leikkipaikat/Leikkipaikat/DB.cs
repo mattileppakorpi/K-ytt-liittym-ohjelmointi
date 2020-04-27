@@ -10,13 +10,14 @@ namespace Leikkipaikat
 {
     public static class DB
     {
-        public static List<Playground> GetPlaygrounds()
+        public static List<Playground> GetPlaygrounds(string polku)
         {
+            string path = @polku;
             //Haetaan tietokannasta lista kohteista.
-            List<Playground> playgrounds = new List<Playground>();
+            //List<Playground> playgrounds = new List<Playground>();
             try
             {
-                using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
+                using (var db = new LiteDatabase(path))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
                    return col.FindAll().ToList();
@@ -29,15 +30,15 @@ namespace Leikkipaikat
                 throw;
             }
         }
-        public static List<Equipment> GetEquipment(Playground playground)
+        public static List<Equipment> GetEquipment(Playground playground, string polku)
         {
-            
-                string name = playground.Address;
+            string path = @polku;
+            string name = playground.Address;
                 List<Equipment> equipment = new List<Equipment>();
 
             try
             {
-                using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
+                using (var db = new LiteDatabase(path))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
                     var result = col.FindOne(x => x.Address.Equals(name));
@@ -62,14 +63,15 @@ namespace Leikkipaikat
             }
            
         }
-        public static string AddPlayground(string address, string info)
+        public static string AddPlayground(string address, string info, string polku)
         {
+            string path = @polku;
             //Lisätään tietokantaan kohde.
             try
             {
                 
                 var playground = new Playground{Address = address,Info = info};
-                using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
+                using (var db = new LiteDatabase(path))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
                     var result = col.FindOne(x => x.Address.Equals(address));
@@ -92,13 +94,14 @@ namespace Leikkipaikat
             }
         }
 
-        public static bool DeletePlayground(Playground playground)
+        public static bool DeletePlayground(Playground playground, string polku)
         {
+            string path = @polku;
             //Poistetaan tietokannasta kohde.
             try
             {
                 int id = playground.Id;
-                using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
+                using (var db = new LiteDatabase(path))
                 {
                     
                     var col = db.GetCollection<Playground>("playgrounds");
@@ -144,14 +147,15 @@ namespace Leikkipaikat
                 throw;
             }
         }
-        public static string AddEquipment(Playground playground, Equipment equipment)
+        public static string AddEquipment(Playground playground, Equipment equipment, string polku)
         {
+            string path = @polku;
             //Lisätään valittuun kohteeseen tietokantaan väline.
-            
-                string name = playground.Address;
+
+            string name = playground.Address;
             string equipmentName = equipment.Name;
             string info = "";
-            using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
+            using (var db = new LiteDatabase(path))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
                     var result = col.FindOne(x => x.Address.Equals(name));
@@ -176,15 +180,15 @@ namespace Leikkipaikat
                 }
           
         }
-        public static bool DelEquipment(Playground playground, Equipment equipment)
+        public static bool DelEquipment(Playground playground, Equipment equipment, string polku)
         {
             //Poistetaan valitusta kohteesta väline tietokannasta.
-            
-            
-                string name = playground.Address;
+
+            string path = @polku;
+            string name = playground.Address;
                 string equipmentName = equipment.Name;
                 
-                using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
+                using (var db = new LiteDatabase(path))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
                     var result = col.FindOne(x => x.Address.Equals(name));
@@ -201,15 +205,16 @@ namespace Leikkipaikat
             
         }
 
-        public static string AddFault(Playground playground, Equipment equipment, string fault)
+        public static string AddFault(Playground playground, Equipment equipment, string fault, string polku)
         {
+            string path = @polku;
             //Lisätään tietyn kohteen tiettyyn välineeseen vika
 
-            
-                string name = playground.Address;
+
+            string name = playground.Address;
                 string equipmentName = equipment.Name;
                 string info = "";
-                using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
+                using (var db = new LiteDatabase(path))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
                     var result = col.FindOne(x => x.Address.Equals(name));
@@ -245,15 +250,16 @@ namespace Leikkipaikat
                
             
         }
-        public static bool DelFault(Playground playground, Equipment equipment, string fault)
+        public static bool DelFault(Playground playground, Equipment equipment, string fault, string polku)
         {
+            string path = @polku;
             //Poistetaan tietyn kohteen tietystä välineestä vika
             try
             {
                 string name = playground.Address;
                 string equipmentName = equipment.Name;
 
-                using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
+                using (var db = new LiteDatabase(path))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
                     var result = col.FindOne(x => x.Address.Equals(name));

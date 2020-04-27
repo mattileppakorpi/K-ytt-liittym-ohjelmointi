@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Leikkipaikat"
         mc:Ignorable="d"
-        Title="Leikkipaikat" Height="450" Width="800">
+        Title="Leikkipaikat" Height="450" Width="810">
     <Grid>
 
         <DockPanel LastChildFill="True">
-            <StackPanel DockPanel.Dock="Left" Background="DarkCyan" HorizontalAlignment="Left" Width="140">
+            <StackPanel DockPanel.Dock="Left" Background="Green" HorizontalAlignment="Left" Width="140">
             <Button x:Name="btnGetPlaygrounds" Content="Hae Leikkipaikat" Click="btnGetPlaygrounds_Click" Margin=" 5"></Button>
             <Button x:Name="btnAddPlaygrounds" Content="Lisää kohde" Margin=" 5" Click="btnAddPlaygrounds_Click"></Button>
             
@@ -18,23 +18,25 @@
                 <TextBox x:Name="txtAddress"  Margin="5" TextWrapping="Wrap"></TextBox>
                 <TextBlock  Margin="5">Info:</TextBlock>
                 <TextBox x:Name="txtInfo"  Margin="5" Height=" 140" MaxWidth="135" TextWrapping="Wrap"></TextBox>
+                <TextBlock  Margin="5">Tallennuskohde:</TextBlock>
+                <TextBox x:Name="txtPath" Text="C:\Temp\MyData.db" ></TextBox>
                
             </StackPanel>
         <StackPanel Orientation="Horizontal" Background="Azure">
-                <StackPanel Background="CadetBlue" Width="140">
+                <StackPanel Background="Yellow" Width="150">
                     <TextBlock Margin="5">Kohteet:</TextBlock>
-                    <DataGrid x:Name="dgPlaygrounds" ItemsSource="{Binding}" MinWidth="150" AutoGenerateColumns="False" SelectionChanged="dgPlaygrounds_SelectionChanged">
+                    <DataGrid x:Name="dgPlaygrounds" ItemsSource="{Binding}" MinWidth="140" AutoGenerateColumns="False" SelectionChanged="dgPlaygrounds_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Osoite:" Binding="{Binding Address}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
-                <StackPanel Background="CornflowerBlue" Width=" 140">
+                <StackPanel Background="MediumVioletRed" Width=" 130">
                     <Button x:Name="btnModify" Content="Muokkaa tietoja" Margin=" 5" Click="btnModify_Click"></Button>
                     <TextBlock  Margin="5">Kohteen tiedot:</TextBlock>
                     <TextBlock x:Name="txtInfo2" Margin=" 5" MaxWidth="135" TextWrapping="Wrap"></TextBlock>
                 </StackPanel>
-                <StackPanel Background="BlueViolet" Width="160">
+                <StackPanel Background="BlueViolet" Width="180">
                     <Button x:Name="btnAddEquipment" Content="Lisää väline" Margin=" 5" Click="btnAddEquipment_Click"></Button>
                     <Button x:Name="btnDelEquipment" Content="Poista valittu väline" Margin=" 5" Click="btnDelEquipment_Click"></Button>
                     <TextBlock  Margin="5">Väline:</TextBlock>
@@ -43,14 +45,14 @@
                     <TextBox x:Name="txtBrand"  Margin="5"></TextBox>
                     <Separator BorderThickness="10" BorderBrush="Black" Margin="10"></Separator>
                     
-                    <DataGrid x:Name="dgEquipment" MinWidth="200" AutoGenerateColumns="False" SelectionChanged="dgEquipment_SelectionChanged"  >
+                    <DataGrid x:Name="dgEquipment" MinWidth="180" AutoGenerateColumns="False" SelectionChanged="dgEquipment_SelectionChanged"  >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Kohteen välineet:" Binding="{Binding Name}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Valmistaja:" Binding="{Binding Brand}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
-                <StackPanel Background="DarkOliveGreen" Width="200">
+                <StackPanel Background="Green" Width="200">
                     <Button x:Name="btnAddFault" Content="Lisää vika" Margin=" 5" Click="btnAddFault_Click"></Button>
                     <Button x:Name="btnDelFault" Content="Poista valittu vika" Margin=" 5" Click="btnDelFault_Click"></Button>
                     <TextBlock  Margin="5">Vika:</TextBlock>
