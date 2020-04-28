@@ -36,7 +36,7 @@ namespace Leikkipaikat
             {
                 //Haetaan hakunapilla leikkipaikat dgPlaygrounds-datagridiin tietokannasta
                 dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds(polku);
-
+                
             }
             catch (Exception ex)
             {
@@ -90,7 +90,7 @@ namespace Leikkipaikat
                 Playground selected = (Playground)dgPlaygrounds.SelectedItem;
                 string address = txtAddress.Text;
                 string info = txtInfo.Text;
-                Leikkipaikat.DB.UpdatePlayground(selected, address, info);
+                Leikkipaikat.DB.UpdatePlayground(selected, address, info, polku);
 
                 dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds(polku);
 
@@ -189,7 +189,10 @@ namespace Leikkipaikat
 
             Playground selected = (Playground)dgPlaygrounds.SelectedItem;
                 Equipment equipment = (Equipment)dgEquipment.SelectedItem;
-                string fault = txtFault.Text;
+            Fault fault = new Fault();
+               fault.FaultName = txtFault.Text;
+            char[] input = txtFaultClass.Text.ToCharArray();
+            fault.Category = input[0];
             if (txtFault.Text != null)
             { 
                 lbFaults.ItemsSource = null;//Leikkipaikat.DB.AddFault(selected, equipment, fault);
@@ -211,8 +214,8 @@ namespace Leikkipaikat
 
             Playground selected = (Playground)dgPlaygrounds.SelectedItem;
                 Equipment equipment = (Equipment)dgEquipment.SelectedItem;
-                string fault = lbFaults.SelectedItem.ToString();
-                 lbFaults.ItemsSource = null;
+                Fault fault = (Fault)lbFaults.SelectedItem;
+                 //lbFaults.ItemsSource = null;
                  Leikkipaikat.DB.DelFault(selected, equipment, fault, polku);
                
                 lbFaults.ItemsSource = equipment.Faults; //Ei päivity!

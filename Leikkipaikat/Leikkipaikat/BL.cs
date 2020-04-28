@@ -20,7 +20,13 @@ namespace Leikkipaikat
     {
         public string Name { get; set; }
         public string Brand { get; set; }
-        public List<string> Faults { get; set; }
+        public List<Fault> Faults { get; set; }
+
+    }
+    public class Fault
+    {
+        public string FaultName { get; set; }
+       public char Category { get; set; }
 
     }
 
