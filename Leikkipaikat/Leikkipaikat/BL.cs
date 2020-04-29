@@ -35,7 +35,10 @@ namespace Leikkipaikat
                 }
             }
         }
-        public string Brand { get { return brand; } set
+        public string Brand
+        {
+            get { return brand; }
+            set
             {
                 if (brand != value)
                 {
@@ -44,7 +47,9 @@ namespace Leikkipaikat
                 }
             }
         }
-        public ObservableCollection<Fault> Faults { get { return faults; }
+        public ObservableCollection<Fault> Faults
+        {
+            get { return faults; }
             set
             {
                 if (Equals(faults, value)) return;
@@ -83,7 +88,9 @@ namespace Leikkipaikat
             }
         }
 
-        public char Category { get { return category; }
+        public char Category
+        {
+            get { return category; }
             set
             {
                 if (category != value)
@@ -91,7 +98,7 @@ namespace Leikkipaikat
                     category = value;
                     RaisePropertyChanged("Category");
                 }
-            } 
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
