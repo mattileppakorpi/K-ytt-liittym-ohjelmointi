@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,9 @@ namespace Leikkipaikat
                 using (var db = new LiteDatabase(path))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
-                   return col.FindAll().ToList();
+                    return col.FindAll().ToList();
                 }
-                 
+
             }
             catch (Exception)
             {
@@ -34,7 +35,7 @@ namespace Leikkipaikat
         {
             string path = @polku;
             string name = playground.Address;
-                List<Equipment> equipment = new List<Equipment>();
+            List<Equipment> equipment = new List<Equipment>();
 
             try
             {
@@ -61,7 +62,7 @@ namespace Leikkipaikat
 
                 throw;
             }
-           
+
         }
         public static string AddPlayground(string address, string info, string polku)
         {
@@ -69,23 +70,22 @@ namespace Leikkipaikat
             //Lisätään tietokantaan kohde.
             try
             {
-                
-                var playground = new Playground{Address = address,Info = info};
+
+                var playground = new Playground { Address = address, Info = info };
                 using (var db = new LiteDatabase(path))
                 {
                     var col = db.GetCollection<Playground>("playgrounds");
                     var result = col.FindOne(x => x.Address.Equals(address));
-                    if (result == null) { 
-                    col.Insert(playground);
+                    if (result == null)
+                    {
+                        col.Insert(playground);
                         return "Lisätty";
                     }
-                    
+
                     else { return "Osoite on jo tietokannassa"; }
                 }
 
 
-               
-                
             }
             catch (Exception)
             {
@@ -103,10 +103,10 @@ namespace Leikkipaikat
                 int id = playground.Id;
                 using (var db = new LiteDatabase(path))
                 {
-                    
+
                     var col = db.GetCollection<Playground>("playgrounds");
                     var result = col.FindOne(x => x.Id.Equals(id));
-                    
+
                     col.Delete(result.Id);
                 };
                 return true;
@@ -152,17 +152,17 @@ namespace Leikkipaikat
             string equipmentName = equipment.Name;
             string info = "";
             using (var db = new LiteDatabase(path))
-                {
-                    var col = db.GetCollection<Playground>("playgrounds");
-                    var result = col.FindOne(x => x.Address.Equals(name));
+            {
+                var col = db.GetCollection<Playground>("playgrounds");
+                var result = col.FindOne(x => x.Address.Equals(name));
                 if (result.Equipment == null)//Jos ei välineitä vielä ole
                 {
                     result.Equipment = new List<Equipment>();
                 }//tarkistetaan ettei tule saman nimistä laitetta
                 var item = result.Equipment.SingleOrDefault(x => x.Name == equipmentName);
-                    if (item != null)
+                if (item != null)
                 {
-                     info = "Saman niminen laite on jo olemassa";
+                    info = "Saman niminen laite on jo olemassa";
                 }
                 else
                 {
@@ -172,9 +172,9 @@ namespace Leikkipaikat
                 }
                 return info;
 
-                
-                }
-          
+
+            }
+
         }
         public static bool DelEquipment(Playground playground, Equipment equipment, string polku)
         {
@@ -182,23 +182,23 @@ namespace Leikkipaikat
 
             string path = @polku;
             string name = playground.Address;
-                string equipmentName = equipment.Name;
-                
-                using (var db = new LiteDatabase(path))
-                {
-                    var col = db.GetCollection<Playground>("playgrounds");
-                    var result = col.FindOne(x => x.Address.Equals(name));
-                    var item = result.Equipment.SingleOrDefault(x => x.Name == equipmentName);
+            string equipmentName = equipment.Name;
+
+            using (var db = new LiteDatabase(path))
+            {
+                var col = db.GetCollection<Playground>("playgrounds");
+                var result = col.FindOne(x => x.Address.Equals(name));
+                var item = result.Equipment.SingleOrDefault(x => x.Name == equipmentName);
                 if (item != null)
                     result.Equipment.Remove(item);
-                    
 
-                    col.Update(result);
 
-                }
-                return true;
+                col.Update(result);
 
-            
+            }
+            return true;
+
+
         }
 
         public static string AddFault(Playground playground, Equipment equipment, Fault fault, string polku)
@@ -208,44 +208,42 @@ namespace Leikkipaikat
 
 
             string name = playground.Address;
-                string equipmentName = equipment.Name;
+            string equipmentName = equipment.Name;
             string faultname = fault.FaultName;
-                string info = "";
-                using (var db = new LiteDatabase(path))
-                {
-                    var col = db.GetCollection<Playground>("playgrounds");
-                    var result = col.FindOne(x => x.Address.Equals(name));
+            string info = "";
+            using (var db = new LiteDatabase(path))
+            {
+                var col = db.GetCollection<Playground>("playgrounds");
+                var result = col.FindOne(x => x.Address.Equals(name));
 
                 foreach (var item in result.Equipment)
                 {
-                    if (item.Name.Equals(equipmentName)) 
-                       
+                    if (item.Name.Equals(equipmentName))
+
                     {
-                        if (item.Faults == null) { item.Faults = new List<Fault>(); }
+                        if (item.Faults == null) { item.Faults = new ObservableCollection<Fault>(); }
                         var z = item.Faults.SingleOrDefault(x => x.FaultName == fault.FaultName);
                         if (z != null)
                         {
-                           info=  "Saman niminen vika on jo olemassa";
+                            info = "Saman niminen vika on jo olemassa";
                         }
-                        
-                        else {
+
+                        else
+                        {
                             item.Faults.Add(fault);
                             col.Update(result);
                             info = "Vika lisätty";
-                            
+
                         }
                     }
-                
+
                 }
                 return info;
 
 
-
             }
-                
 
-               
-            
+
         }
         public static bool DelFault(Playground playground, Equipment equipment, Fault fault, string polku)
         {
@@ -263,10 +261,10 @@ namespace Leikkipaikat
                     var result = col.FindOne(x => x.Address.Equals(name));
                     var item = result.Equipment.SingleOrDefault(x => x.Name == equipmentName);
                     Fault f = item.Faults.SingleOrDefault(x => x.FaultName == faultName);
-                   
+
 
                     if (f != null)
-                    { 
+                    {
                         item.Faults.Remove(f);
                     }
                     var copy = item;
@@ -283,6 +281,20 @@ namespace Leikkipaikat
                 throw;
             }
         }
+        public static ObservableCollection<Fault> GetFaults(Playground playground, Equipment equipment, string polku)
+        {
+            string path = @polku;
+            string name = playground.Address;
+            string equipmentName = equipment.Name;
+
+            using (var db = new LiteDatabase(path))
+            {
+                var col = db.GetCollection<Playground>("playgrounds");
+                var result = col.FindOne(x => x.Address.Equals(name));
+                var item = result.Equipment.SingleOrDefault(x => x.Name == equipmentName);
+
+
+            }
 
 
 

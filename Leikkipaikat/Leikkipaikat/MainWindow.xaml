@@ -71,14 +71,14 @@
                     <TextBlock  Margin="5">Välineen viat:</TextBlock>
                 <DataGrid x:Name="lbFaults" ColumnWidth="*" Margin="5" CanUserAddRows="False" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Vian nimi:" Binding="{Binding FaultName}"  >
+                            <DataGridTextColumn Header="Vian nimi:" Binding="{Binding FaultName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Vikaluokka:" Binding="{Binding Category}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Vikaluokka:" Binding="{Binding Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
                         </DataGrid.Columns>
                 </DataGrid>
                 </StackPanel>
