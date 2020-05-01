@@ -41,7 +41,6 @@ namespace Leikkipaikat
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
             }
 
@@ -50,11 +49,13 @@ namespace Leikkipaikat
         private void btnAddPlaygrounds_Click(object sender, RoutedEventArgs e)
         {
             string polku = txtPath.Text;
+            //Lisätään uusi kohde, tiedot tekstikentistä osoite ja info.
+            //Toisella rivillä päivitetään datagridi.
             try
             {
                 if (txtAddress.Text != "")
                 {
-                    //Lisätään uusi kohde, tiedot tekstikentistä osoite ja info. Toisella rivillä päivitetään datagridi.
+                   
                     string info = Leikkipaikat.DB.AddPlayground(txtAddress.Text, txtInfo.Text, polku);
                     dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds(polku);
                     MessageBox.Show(info);
@@ -62,28 +63,32 @@ namespace Leikkipaikat
                 else { MessageBox.Show("Osoiterivi on tyhjä"); }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
             }
         }
         private void btnDelPlayground_Click(object sender, RoutedEventArgs e)
         {
             string polku = txtPath.Text;
-
+            //Poistetaan datagridistä valittu kohde. Viimeisellä rivillä taas päivitetään.
+            try
             {
-                //Poistetaan datagridistä valittu kohde. Viimeisellä rivillä taas päivitetään.
-                if (dgPlaygrounds.SelectedItem != null) { 
-                Playground playground = (Playground)dgPlaygrounds.SelectedItem;
-                Leikkipaikat.DB.DeletePlayground(playground, polku);
+                if (dgPlaygrounds.SelectedItem != null)
+                {
+                    Playground playground = (Playground)dgPlaygrounds.SelectedItem;
+                    Leikkipaikat.DB.DeletePlayground(playground, polku);
 
-                dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds(polku);
+                    dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds(polku);
+                    MessageBox.Show("Kohde poistettu");
                 }
                 else { MessageBox.Show("Valinta on tyhjä"); }
             }
-
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
+            }
+            
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
@@ -105,57 +110,93 @@ namespace Leikkipaikat
                 }
                 else { MessageBox.Show("Valinta puuttuu"); }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
             }
         }
+        private void txtInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //Tuplaklikkaamalla infokenttää pääsee infotekstiä muokkaamaan.
+
+            try
+            {
+                if (dgPlaygrounds.SelectedItem != null)
+                {
+                    Playground selected = (Playground)dgPlaygrounds.SelectedItem;
+                    txtInfo.Text = selected.Info;
+                    txtInfo2.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
+            }
+        }
+
 
         private void dgPlaygrounds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string polku = txtPath.Text;
-            //Valitun kohteen tiedot menevät osoite- ja info-kenttiin. Näin kohdetta voi muokata halutessa.
-            if (dgPlaygrounds.SelectedItem != null)
+            //Valitun kohteen tiedot menevät osoite- ja info-kenttiin. 
+
+            try
             {
-                Object obj = dgPlaygrounds.SelectedItem;
-                Playground chosen = (Playground)obj;
-
-                if (chosen != null)
+                if (dgPlaygrounds.SelectedItem != null)
                 {
-                    txtAddress.Text = chosen.Address;
-                    txtInfo.Text = chosen.Info;
+                    Object obj = dgPlaygrounds.SelectedItem;
+                    Playground chosen = (Playground)obj;
 
+                    if (chosen != null)//Tämä lienee turhaa toistoa?
+                    {
+                        txtAddress.Text = chosen.Address;
+                        txtInfo.Text = "tuplaklikkaa tätä muokataksesi infoa";
 
-                    //Valitun kohteen info näytetään myös txtInfo2-kentässä ja välineet gdEquipment-datagridissä.
-
-                    dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(chosen, polku);
-                    txtInfo2.Text = chosen.Info;
+                        dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(chosen, polku);
+                        lbFaults.ItemsSource = null;
+                        txtInfo2.Text = chosen.Info;
+                        txtFault.Text = "";
+                        txtFaultClass.Text = "";
+                    }
+                    else //jos ei valintaa ole kentät tyhjenevät... tämä on itse asiassa turha?
+                    {
+                        txtAddress.Text = "";
+                        txtInfo.Text = "";
+                        txtInfo2.Text = "";
+                    }
                 }
-                else //jos ei valintaa ole kentät tyhjenevät
+                else
                 {
                     txtAddress.Text = "";
                     txtInfo.Text = "";
                     txtInfo2.Text = "";
                 }
             }
-            else
+            catch (Exception  ex)
             {
-                txtAddress.Text = "";
-                txtInfo.Text = "";
-                txtInfo2.Text = "";
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
             }
 
         }
         private void dgEquipment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //dgequipment-kentän valitun välineen viat menevät dgFaults-datagridiin.
-
-            Object selected = dgEquipment.SelectedItem;//tyhjä valinta pistää sekaisin edelleen
-            if (selected != null)
+            string polku = txtPath.Text;
+            //dgequipment-kentän valitun välineen viat menevät lbFaults-datagridiin. (oli alunperin ListBox)
+            //Samalla vian syöttäkentät tyhjenevät
+            try
             {
-                Equipment equipment = (Equipment)selected;
-                lbFaults.ItemsSource = equipment.Faults;
+                if (dgPlaygrounds.SelectedItem != null && dgEquipment.SelectedItem != null)
+                {
+                    Playground selected = (Playground)dgPlaygrounds.SelectedItem;
+                    Equipment equipment = (Equipment)dgEquipment.SelectedItem;
+                    lbFaults.ItemsSource = Leikkipaikat.DB.GetFaults(selected, equipment, polku);
+                    txtFault.Text = "";
+                    txtFaultClass.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
             }
 
         }
@@ -166,16 +207,25 @@ namespace Leikkipaikat
             //Lisätään valitulle kohteelle väline, tiedot txtequipment ja txtbrand-kentistä.
 
             Equipment equipment = new Equipment();
-            if (txtEquipment.Text != "" && dgPlaygrounds.SelectedItem!=null)
+            try
             {
-                equipment.Name = txtEquipment.Text;
-                equipment.Brand = txtBrand.Text;
-                Playground selected = (Playground)dgPlaygrounds.SelectedItem;
-                string info = Leikkipaikat.DB.AddEquipment(selected, equipment, polku);
-                dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(selected, polku);
-                MessageBox.Show(info);
+                if (txtEquipment.Text != "" && dgPlaygrounds.SelectedItem != null)
+                {
+                    equipment.Name = txtEquipment.Text;
+                    equipment.Brand = txtBrand.Text;
+                    Playground selected = (Playground)dgPlaygrounds.SelectedItem;
+                    string info = Leikkipaikat.DB.AddEquipment(selected, equipment, polku);
+                    dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(selected, polku);
+                    MessageBox.Show(info);
+                    txtEquipment.Text = "";
+                    txtBrand.Text = "";
+                }
+                else { MessageBox.Show("Kohde tai välineen nimi puuttuu"); }
             }
-            else { MessageBox.Show("Kohde tai välineen nimi puuttuu"); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
+            }
 
 
         }
@@ -185,45 +235,52 @@ namespace Leikkipaikat
             string polku = txtPath.Text;
             //Poistetaan valitun kohteen valittu väline.
 
-            if (dgPlaygrounds.SelectedItem != null && dgEquipment.SelectedItem!=null)
+            try
             {
-                Playground selected = (Playground)dgPlaygrounds.SelectedItem;
-                Equipment equipment = (Equipment)dgEquipment.SelectedItem;
+                if (dgPlaygrounds.SelectedItem != null && dgEquipment.SelectedItem != null)
+                {
+                    Playground selected = (Playground)dgPlaygrounds.SelectedItem;
+                    Equipment equipment = (Equipment)dgEquipment.SelectedItem;
 
-                Leikkipaikat.DB.DelEquipment(selected, equipment, polku);
-                dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(selected, polku);
+                    Leikkipaikat.DB.DelEquipment(selected, equipment, polku);
+                    dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(selected, polku);
+                    MessageBox.Show("Väline poistettu");
+                }
+                else { MessageBox.Show("Kohde tai välineen nimi puuttuu"); }
             }
-            else { MessageBox.Show("Kohde tai välineen nimi puuttuu"); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
+            }
 
 
         }
 
         private void btnAddFault_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {  
             string polku = txtPath.Text;
-            //Lisätään vika valitun kohteen valittuun välineeseen. Vika txtFault-kentästä.
-
-
-            Playground selected = (Playground)dgPlaygrounds.SelectedItem;
-            Equipment equipment = (Equipment)dgEquipment.SelectedItem;
-            Fault fault = new Fault();
-            fault.FaultName = txtFault.Text;
-            char[] input = txtFaultClass.Text.ToCharArray();
-
-            if (txtFault.Text != "" && input.Length > 0 && equipment != null)
+            //Lisätään vika valitun kohteen valittuun välineeseen. Vika txtFaultClass- ja txtFault-kentistä 
+            //Katsotaan ensin että kentät on täytetty. Sitten haetaan viat uudelleen.
+            try
             {
-                fault.Category = input[0];
+                Playground selected = (Playground)dgPlaygrounds.SelectedItem;
+                Equipment equipment = (Equipment)dgEquipment.SelectedItem;
+                Fault fault = new Fault();
+                fault.FaultName = txtFault.Text;
+                char[] input = txtFaultClass.Text.ToCharArray();
 
-                MessageBox.Show(Leikkipaikat.DB.AddFault(selected, equipment, fault, polku));
-
-                lbFaults.ItemsSource = Leikkipaikat.DB.GetFaults(selected, equipment, polku);
+                if (txtFault.Text != "" && input.Length > 0 && equipment != null)
+                {
+                    fault.Category = input[0];
+                    MessageBox.Show(Leikkipaikat.DB.AddFault(selected, equipment, fault, polku));
+                    lbFaults.ItemsSource = Leikkipaikat.DB.GetFaults(selected, equipment, polku);
+                }
+                else { MessageBox.Show("Välineen valinta tai vian nimi/luokka puuttuu"); }
             }
-            else { MessageBox.Show("Välineen valinta tai vian nimi/luokka puuttuu"); }
-
-            //lbFaults.ItemsSource = equipment.Faults;
-
-           
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
+            }
 
         }
 
@@ -231,19 +288,31 @@ namespace Leikkipaikat
         {
             string polku = txtPath.Text;
             //Poistetaan valittu vika valitun kohteen valitusta välineestä.
+            //Tutkitaan ensin että valinnat on tehty ja sitten haetaan viat uusiksi
 
-            if (dgPlaygrounds.SelectedItem!= null && dgEquipment.SelectedItem != null && lbFaults.SelectedItem!=null) 
-            { 
-            Playground selected = (Playground)dgPlaygrounds.SelectedItem;
-            Equipment equipment = (Equipment)dgEquipment.SelectedItem;
-            Fault fault = (Fault)lbFaults.SelectedItem;
+            try
+            {
+                if (dgPlaygrounds.SelectedItem != null && dgEquipment.SelectedItem != null && lbFaults.SelectedItem != null)
+                {
+                    Playground selected = (Playground)dgPlaygrounds.SelectedItem;
+                    Equipment equipment = (Equipment)dgEquipment.SelectedItem;
+                    Fault fault = (Fault)lbFaults.SelectedItem;
+                    //Lähetetään tiedot metodille
+                    Leikkipaikat.DB.DelFault(selected, equipment, fault, polku);
+                    //Haetaan uudet tiedot
+                    lbFaults.ItemsSource = Leikkipaikat.DB.GetFaults(selected, equipment, polku);
+                    MessageBox.Show("Vika poistettu");
 
-            Leikkipaikat.DB.DelFault(selected, equipment, fault, polku);
-            lbFaults.ItemsSource = Leikkipaikat.DB.GetFaults(selected, equipment, polku);
-
+                }
+                else { MessageBox.Show("Vikaa ei valittu"); }
             }
-            else { MessageBox.Show("Vikaa ei valittu"); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message); ;
+            }
 
         }
+
+        
     }
 }

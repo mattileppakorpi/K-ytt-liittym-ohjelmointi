@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using LiteDB;
 
+//INotifyPropertyChanged-ominaisuus Equipoment ja Fault-luokilta jäi nyt hieman torsoksi.
+
 namespace Leikkipaikat
 {
     public class Playground
