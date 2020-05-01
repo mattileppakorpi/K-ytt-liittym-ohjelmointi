@@ -31,13 +31,17 @@ namespace Leikkipaikat
 
         private void btnGetPlaygrounds_Click(object sender, RoutedEventArgs e)
         {
+            
             string polku = txtPath.Text;
             try
-            {   
+            {
                 //Haetaan hakunapilla leikkipaikat dgPlaygrounds-datagridiin tietokannasta ja 
                 //lähetetään tieto polusta
+                if (txtPath.Text != "")
+                { 
                 dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds(polku);
-
+                }
+                else { MessageBox.Show("Osoite puuttuu"); }
             }
             catch (Exception ex)
             {
@@ -150,7 +154,7 @@ namespace Leikkipaikat
                     if (chosen != null)//Tämä lienee turhaa toistoa?
                     {
                         txtAddress.Text = chosen.Address;
-                        txtInfo.Text = "tuplaklikkaa tätä muokataksesi infoa";
+                        txtInfo.Text = "Tuplaklikkaa tätä muokataksesi infoa";
 
                         dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(chosen, polku);
                         lbFaults.ItemsSource = null;
