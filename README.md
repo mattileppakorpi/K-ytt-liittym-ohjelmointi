@@ -14,17 +14,22 @@
 käyttäjä voi itse määritellä. Kohteille voidaan lisätä ja poistaa välineitä ja välineille lisätä tai poistaa vikoja. 
 
 **Toteutetut toiminnalliset vaatimukset:**
-	* Voidaan lisätä ja poistaa kohteita, välineitä ja vikoja, ja lisäksi muokata kohteiden tietoa.
+
+* Voidaan lisätä ja poistaa kohteita, välineitä ja vikoja, ja lisäksi muokata kohteiden tietoa.
 
 **Toteuttamtta jääneet:**
-	* Olioiden päivittämiselle tai muokkaamiselle olisi ollut hyvä tehdä varmistus käyttäjältä, eli paina Y/N ennen toimenpidettä.
+
+* Olioiden päivittämiselle tai muokkaamiselle olisi ollut hyvä tehdä varmistus käyttäjältä, eli paina Y/N ennen toimenpidettä.
 Myös vikojen ja välineiden tietojen muokkaus jäi tekemättä, voi ainoastaan lisätä ja poistaa. Myös vikaluokan syötteet olisi
 voinut rajata niin että väärät eivät kelpaa.
 
 **Yli/ohi vaatimusten tehdyt toiminnallisuudet:**
 
+* INotifyPropertChanged-rajapinnan käyttö korvattiin metodeilla joka päivitti kentät. 
+
 **Ei-toiminnalliset vaatimukset:**
-	* Ks. toteuttamatta jääneet.
+
+* Ks. toteuttamatta jääneet.
 
 ### 3. [Kuvat](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Dokut/kuvat)
 
