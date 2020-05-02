@@ -1,5 +1,4 @@
-
-###Tekijä:
+### Tekijä:
 * Matti Leppäkorpi N3998, 1. vuoden IT-opiskelija Jyväskylän Ammattikorkeakoulusta, ryhmä TTV19S3
 
 **Sovelluksen yleiskuvaus:**
