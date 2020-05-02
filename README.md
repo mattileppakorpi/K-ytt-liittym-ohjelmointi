@@ -62,7 +62,7 @@ josta asiakas voi tilata korjauksen, olettaen että hänellä olisi järjestelm�
 Ja eri käyttäjätilien mahdollistaminen olisi tottakai tarpeen, mutta ne eivät enää taida olla 
 tämän kurssin asioita. Alla vielä lopullinen luokkarakenne:
 
-![](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/blob/master/Dokut/kuvat/Luokat.PNG)
+![](https://gitlab.labranet.jamk.fi/harjoituksia/ttos0100-2020/raw/master/dokumentit/02-vaatimusmaarittely/kuvat/seniorsirpa.png?inline=false)
 
 Alkuperäisestä suunnitelmasta poiketen Playgroundille piti lisätä Id tietokannan toiminnan helpottamiseksi. 
 Välineille ja vioille sen sijaan ei tarvittu Id:tä, koska ne ovat aina Playgroundiin liittyviä. Viat meinasin aluksi 
