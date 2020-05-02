@@ -15,6 +15,12 @@ Sovellusta käytetään Windowsissa.
 
 Toiminnot:
 Kohteiden ja niiden tietojen tarkastelu, muokkaaminen, lisääminen ja poistaminen.
+Välineiden tarkastelu, lisääminen ja poistaminen.
+Vikojen tarkastelu, lisäämien ja poistaminen.
+
+Käsitteitä ovat kohde, eli siis leikkialue, sen sisältämät leikkivälineet, ja leikkivälineiden sisältämt viat. Yhdellä
+kohteella voi olla yksi tai monta leikkivälinettä, ja joka leikkivälineessä ei yhtään, yksi tai useampi vika. 
+Nämä esitetään listoina.
 
 Käyttötapauskaavio alla:
 
