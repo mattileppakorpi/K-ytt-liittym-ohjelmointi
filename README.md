@@ -13,17 +13,17 @@
 * Käyttöliittymän kautta voidaan lisätä, muokata ja poistaa kohteita leikkipaikkatietokannasta. Tietokannan tallennuspaikan 
 käyttäjä voi itse määritellä. Kohteille voidaan lisätä ja poistaa välineitä ja välineille lisätä tai poistaa vikoja. 
 
-** Toteutetut toiminnalliset vaatimukset:**
+**Toteutetut toiminnalliset vaatimukset:**
 	* Voidaan lisätä ja poistaa kohteita, välineitä ja vikoja, ja lisäksi muokata kohteiden tietoa.
 
-** Toteuttamtta jääneet:**
+**Toteuttamtta jääneet:**
 	* Olioiden päivittämiselle tai muokkaamiselle olisi ollut hyvä tehdä varmistus käyttäjältä, eli paina Y/N ennen toimenpidettä.
 Myös vikojen ja välineiden tietojen muokkaus jäi tekemättä, voi ainoastaan lisätä ja poistaa. Myös vikaluokan syötteet olisi
 voinut rajata niin että väärät eivät kelpaa.
 
-** Yli/ohi vaatimusten tehdyt toiminnallisuudet:**
+**Yli/ohi vaatimusten tehdyt toiminnallisuudet:**
 
-** Ei-toiminnalliset vaatimukset:**
+**Ei-toiminnalliset vaatimukset:**
 	* Ks. toteuttamatta jääneet.
 
 ### 3. [Kuvat](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Dokut/kuvat)
@@ -59,7 +59,7 @@ tämän kurssin asioita. Alla vielä lopullinen luokkarakenne:
 
 ![](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/blob/master/Dokut/kuvat/Luokat.PNG)
 
-alkuperäisestä suunnitelmasta poiketen Playgroundille piti lisätä Id tietokannan toiminnan helpottamiseksi. 
+Alkuperäisestä suunnitelmasta poiketen Playgroundille piti lisätä Id tietokannan toiminnan helpottamiseksi. 
 Välineille ja vioille sen sijaan ei tarvittu Id:tä, koska ne ovat aina Playgroundiin liittyviä. Viat meinasin aluksi 
 tehdä pelkkinä stringeinä, mutta muutin olioiksi että sain myös vikaluokan mukaan.
 
