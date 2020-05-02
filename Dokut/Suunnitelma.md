@@ -1,28 +1,29 @@
 
+###Tekijä:
+* Matti Leppäkorpi N3998, 1. vuoden IT-opiskelija Jyväskylän Ammattikorkeakoulusta, ryhmä TTV19S3
 
-Tekijä:
-Matti Leppäkorpi N3998, 1. vuoden IT-opiskelija Jyväskylän Ammattikorkeakoulusta, ryhmä TTV19S3
+**Sovelluksen yleiskuvaus:**
 
-Sovelluksen yleiskuvaus:
-Sovellus on tarkoitettu leikkipaikkojen turvatarkastuksien tietojen hallintaan. Sovelluksella voi lisätä kohteita, kohteisiin
+* Sovellus on tarkoitettu leikkipaikkojen turvatarkastuksien tietojen hallintaan. Sovelluksella voi lisätä kohteita, kohteisiin
 leikkivälineitä ja välineille vikoja. Tietoja pitää myös pystyä poistamaan ja muokkaamaan.
 
-Kenelle sovellus on suunnattu:
-Sovellus on tarkoitettu leikkipaikkoja tarkastavien henkilöiden käyttöön tietojen hallinnoimiseksi.
+**Kenelle sovellus on suunnattu:**
 
-Käyttöympäristö ja käytetyt teknologiat:
-Sovellusta käytetään Windowsissa.
+* Sovellus on tarkoitettu leikkipaikkoja tarkastavien henkilöiden käyttöön tietojen hallinnoimiseksi.
 
-Toiminnot:
-Kohteiden ja niiden tietojen tarkastelu, muokkaaminen, lisääminen ja poistaminen.
-Välineiden tarkastelu, lisääminen ja poistaminen.
-Vikojen tarkastelu, lisäämien ja poistaminen.
+**Käyttöympäristö ja käytetyt teknologiat:**
+* Sovellusta käytetään Windowsissa.
 
-Käsitteitä ovat kohde, eli siis leikkialue, sen sisältämät leikkivälineet, ja leikkivälineiden sisältämt viat. Yhdellä
+**Toiminnot:**
+* Kohteiden ja niiden tietojen tarkastelu, muokkaaminen, lisääminen ja poistaminen.
+* Välineiden tarkastelu, lisääminen ja poistaminen.
+* Vikojen tarkastelu, lisäämien ja poistaminen.
+
+* Käsitteitä ovat kohde, eli siis leikkialue, sen sisältämät leikkivälineet, ja leikkivälineiden sisältämt viat. Yhdellä
 kohteella voi olla yksi tai monta leikkivälinettä, ja joka leikkivälineessä ei yhtään, yksi tai useampi vika. 
 Nämä esitetään listoina.
 
-Käyttötapauskaavio alla:
+* Käyttötapauskaavio alla:
 
 ```plantuml
 
