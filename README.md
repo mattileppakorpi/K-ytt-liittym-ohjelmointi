@@ -46,6 +46,7 @@ myös luokka pitää laittaa, ja painetaan lisää vika. Poistaminen kun vika va
 ### 4. [Testidata](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Dokut%2FTietokanta) 
 * Repon Dokut/tietokanta-kansiossa, josta sen voi ladata minne haluaa ja muuttaa polun oikein käyttöliittymään.
 Oletuksena C:\Temp\Mydata. Jos ei dataa ole, sitä voi itse alkaa kirjoittamaan ja tallentaa määrittelemäänsä kohteeseen.
+* Data siis tallenetaan LiteDB-tietokantaan joka tekee tiedoston käyttäjän määrittelemään paikkaan. Tiedot tallenetaan olioina. 
 * Alla vielä lopullinen luokkarakenne:
 
 ![](Dokut/kuvat/Luokat.PNG)
