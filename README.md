@@ -7,23 +7,23 @@
 * [Dokumentit](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Dokut)
 
 ### 1. Asennus
-Nugetissa Install-Package LiteDB. http://www.litedb.org/docs/getting-started/
+* Nugetissa Install-Package LiteDB. http://www.litedb.org/docs/getting-started/
 
 ### 2. Tietoa ohjelmasta
 * Käyttöliittymän kautta voidaan lisätä, muokata ja poistaa kohteita leikkipaikkatietokannasta. Tietokannan tallennuspaikan 
 käyttäjä voi itse määritellä. Kohteille voidaan lisätä ja poistaa välineitä ja välineille lisätä tai poistaa vikoja. 
 
-** Toteutetut toiminnalliset vaatimukset:
+** Toteutetut toiminnalliset vaatimukset:**
 	* Voidaan lisätä ja poistaa kohteita, välineitä ja vikoja, ja lisäksi muokata kohteiden tietoa.
 
-** Toteuttamtta jääneet:
+** Toteuttamtta jääneet:**
 	* Olioiden päivittämiselle tai muokkaamiselle olisi ollut hyvä tehdä varmistus käyttäjältä, eli paina Y/N ennen toimenpidettä.
 Myös vikojen ja välineiden tietojen muokkaus jäi tekemättä, voi ainoastaan lisätä ja poistaa. Myös vikaluokan syötteet olisi
 voinut rajata niin että väärät eivät kelpaa.
 
-** Yli/ohi vaatimusten tehdyt toiminnallisuudet:
+** Yli/ohi vaatimusten tehdyt toiminnallisuudet:**
 
-** Ei-toiminnalliset vaatimukset:
+** Ei-toiminnalliset vaatimukset:**
 	* Ks. toteuttamatta jääneet.
 
 ### 3. [Kuvat](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Dokut/kuvat)
@@ -39,7 +39,7 @@ tiedot kenttiin ja sitten lisää-nappia. Poistaminen kun väline on valittuna.
 myös luokka pitää laittaa, ja painetaan lisää vika. Poistaminen kun vika valittuna. Vikaluokka on yksi iso kirjain.
 
 ### 4. [Testidata](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Dokut%2FTietokanta) 
-repon Dokut/tietokanta-kansiossa, josta sen voi ladata minne haluaa ja muuttaa polun oikein käyttöliittymään.
+* Repon Dokut/tietokanta-kansiossa, josta sen voi ladata minne haluaa ja muuttaa polun oikein käyttöliittymään.
 Oletuksena C:\Temp\Mydata. Jos ei dataa ole, sitä voi itse alkaa kirjoittamaan ja tallentaa määrittelemäänsä kohteeseen.
 
 ### 5. Ongelmat, bugit ja jatkokehitys
@@ -56,7 +56,9 @@ josta asiakas voi tilata korjauksen, olettaen että hänellä olisi järjestelm�
 * Toisekseen koko järjestelmä olisi hyvä olla käytettävissä puhelimessa/tabletilla jos sitä oikeasti joskus meinaisi käyttää. 
 Ja eri käyttäjätilien mahdollistaminen olisi tottakai tarpeen, mutta ne eivät enää taida olla 
 tämän kurssin asioita. Alla vielä lopullinen luokkarakenne:
+
 ![](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/blob/master/Dokut/kuvat/Luokat.PNG)
+
 alkuperäisestä suunnitelmasta poiketen Playgroundille piti lisätä Id tietokannan toiminnan helpottamiseksi. 
 Välineille ja vioille sen sijaan ei tarvittu Id:tä, koska ne ovat aina Playgroundiin liittyviä. Viat meinasin aluksi 
 tehdä pelkkinä stringeinä, mutta muutin olioiksi että sain myös vikaluokan mukaan.
@@ -79,11 +81,11 @@ Varmasti opettelemisen arvoinen asia joka tullee vielä usein vastaan olisi Enti
 INotifyPropertyChanged-ominaisuus jäi nyt hieman arvoitukseksi, mutta se olisi varmasti hyvä opetella.
 
 ### 7. Tekijä
-Matti Leppäkorpi N3998 TTV19S3 teki yksin. Projekti aloitettu 17.4 ja työtä tehty käytännössä joka päivä tunnista-
+* Matti Leppäkorpi N3998 TTV19S3 teki yksin. Projekti aloitettu 17.4 ja työtä tehty käytännössä joka päivä tunnista-
 parista koko päivän mittaisiin istuintoihin.
 
 ### 8. Ehdotus arvosanaksi
-Koska arvosteluperusteissa ei lue yksiselitteisesti mitä ohjelman kuuluisi sisältää on arvioiminen vaikeaa, mutta 
+* Koska arvosteluperusteissa ei lue yksiselitteisesti mitä ohjelman kuuluisi sisältää on arvioiminen vaikeaa, mutta 
 toteutus oli mielestäni kohtalaisen haasteellinen ja laaja, se sisältää olioita ja niiden välisiä suhteita, poikkeukset
 ja väärät syötteet/painallukset on pyritty huomioimaan. Käytetty tietokanta on melko helppokäyttöinen, mutta valinta on
 perusteltu. Luokat ja tietokantayhteydet on tehty omiin tiedostoihinsa erilleen käyttöliittymän koodista.
