@@ -18,7 +18,7 @@ käyttäjä voi itse määritellä. Kohteille voidaan lisätä ja poistaa välin
 
 **Toteutetut toiminnalliset vaatimukset:**
 
-* Voidaan lisätä ja poistaa kohteita, välineitä ja vikoja, ja lisäksi muokata kohteiden tietoa.
+* Voidaan tarkastella, lisätä ja poistaa kohteita, välineitä ja vikoja sekä lisäksi muokata kohteiden tietoja.
 
 **Toteuttamtta jääneet:**
 
@@ -28,7 +28,8 @@ voinut rajata niin että väärät eivät kelpaa.
 
 **Yli/ohi vaatimusten tehdyt toiminnallisuudet:**
 
-* INotifyPropertChanged-rajapinnan käyttö korvattiin metodeilla joka päivitti kentät. 
+* INotifyPropertChanged-rajapinnan käyttö korvattiin metodeilla joka päivitti kentät. Tallennuspaikan määrittämisen mahdollisuus oli 
+alkuperäiseen suunnitelmaan nähden ylimääräinen ominaisuus.
 
 **Ei-toiminnalliset vaatimukset:**
 
