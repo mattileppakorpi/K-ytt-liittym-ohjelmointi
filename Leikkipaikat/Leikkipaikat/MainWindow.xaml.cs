@@ -270,7 +270,7 @@ namespace Leikkipaikat
                 Playground selected = (Playground)dgPlaygrounds.SelectedItem;
                 Equipment equipment = (Equipment)dgEquipment.SelectedItem;
                 Fault fault = new Fault();
-                fault.FaultName = txtFault.Text;
+                fault.FaultName = txtFault.Text;             
                 char[] input = txtFaultClass.Text.ToCharArray();
 
                 if (txtFault.Text != "" && input.Length > 0 && equipment != null)
@@ -312,11 +312,24 @@ namespace Leikkipaikat
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message); ;
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
             }
 
         }
 
-        
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {//Tyhjennetään vasemman puoleisen palkin tekstikentät käytön helpottamiseksi.
+            try
+            {
+                txtAddress.Text = "";
+                txtInfo.Text = "";
+                txtInfo2.Text = "";
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Ohjelman suorituksen aikana tapahtui seuraava virhe: " + ex.Message);
+            }
+        }
     }
 }

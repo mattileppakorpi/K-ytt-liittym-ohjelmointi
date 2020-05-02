@@ -1,14 +1,14 @@
-Sisällysluettelo
+
 
 Tekijä:
-Matti Leppäkorpi, 1. vuoden IT-opiskelija Jyväskylän Ammattikorkeakoulusta.
+Matti Leppäkorpi N3998, 1. vuoden IT-opiskelija Jyväskylän Ammattikorkeakoulusta, ryhmä TTV19S3
 
 Sovelluksen yleiskuvaus:
 Sovellus on tarkoitettu leikkipaikkojen turvatarkastuksien tietojen hallintaan. Sovelluksella voi lisätä kohteita, kohteisiin
 leikkivälineitä ja välineille vikoja. Tietoja pitää myös pystyä poistamaan ja muokkaamaan.
 
 Kenelle sovellus on suunnattu:
-Sovellus on tarkoitettu leikkipaikkoja tarkastavien henkilöiden käyttöön.
+Sovellus on tarkoitettu leikkipaikkoja tarkastavien henkilöiden käyttöön tietojen hallinnoimiseksi.
 
 Käyttöympäristö ja käytetyt teknologiat:
 Sovellusta käytetään Windowsissa.
@@ -16,7 +16,28 @@ Sovellusta käytetään Windowsissa.
 Toiminnot:
 Kohteiden ja niiden tietojen tarkastelu, muokkaaminen, lisääminen ja poistaminen.
 
-Toiminnoista piiretään UML:n Käyttötapaus-kaavio, kaaviossa esitetään eri roolit ja käyttötapaukset=toiminnot
-Sovelluksen keskeiset käsitteet listataan ja luodaan Käsitemalli, jossa esitetään käsitteet ja niiden väliset suhteet; tästä jalostetaan sitten luokkamalli sovelluksesta, mitä luokkia sovelluksessa on ja niiden tärkeimmät tehtävät ja ominaisuudet sekä luokkien väliset suhteet UML:tä käyttäen. Suunnitelmassa alustava ajatus, loppuraportissa lopullinen rakenne ja perustelut muutoksille PS Muista kertoa ajatuksista, pelkkä kaaviokuvio ei ole riittävä.
-Työnjako, kuinka työnjako aiotaan hoitaa eli vastuut eri tehtäville
-Työaikasuunnitelma (mitä aiotaan tehdään ja minä päivänä/viikkona, suunnitellut resurssit), kerää toteuma päivittäin/viikottain, esitä suunnitelmassa muutama tuleva viikko. Pohdi kuitenkin kokonaisuutta.
+Käyttötapauskaavio alla:
+
+```plantuml
+
+Tarkastaja -left-- (Jarjestelman avaaminen)
+Tarkastaja -left- (Kohteen valinta listalta)
+Tarkastaja -left-- (Kohteen lisaaminen)
+rectangle toinenlista {
+Tarkastaja--- (Kohteen tietojen tarkastelu)
+Tarkastaja-- (Valineen valinta listalta)
+Tarkastaja-- (Kohteen tietojen muokkaaminen)
+}
+rectangle kolmaslista {
+Tarkastaja -right-- (Valineen lisaaminen)
+Tarkastaja -right-- (Valineen tietojen tarkastelu)
+Tarkastaja -right-- (Vian valinta listalta)
+Tarkastaja -right-- (Valineen tietojen muokkaaminen)
+}
+rectangle neljaslista {
+Tarkastaja--- (vian lisaaminen)
+Tarkastaja--- (vian tietojen tarkastelu)
+Tarkastaja--- (vian tietojen muokkaaminen)
+}
+
+```

@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Leikkipaikat"
         mc:Ignorable="d"
-        Title="Leikkipaikat" Height="450" Width="800">
+        Title="Leikkipaikat" Height="450" Width="805">
     
     <Grid>
 
         <DockPanel LastChildFill="True">
             <StackPanel DockPanel.Dock="Left" Background="LightBlue" HorizontalAlignment="Left" Width="200">
-            <Button x:Name="btnGetPlaygrounds" Content="Hae Leikkipaikat" Click="btnGetPlaygrounds_Click" Margin=" 5"></Button>
-            <Button x:Name="btnAddPlaygrounds" Content="Lisää kohde" Margin=" 5" Click="btnAddPlaygrounds_Click"></Button>
-            
-                <Button x:Name="btnDelPlayground" Content="Poista kohde" Margin=" 5" Click="btnDelPlayground_Click"></Button>
-                <Button x:Name="btnModify" Content="Muokkaa tietoja" Margin=" 5" Click="btnModify_Click"></Button>
+            <Button x:Name="btnGetPlaygrounds" Content="Hae Leikkipaikat" Click="btnGetPlaygrounds_Click" Margin=" 4"></Button>
+            <Button x:Name="btnAddPlaygrounds" Content="Lisää kohde" Margin=" 4" Click="btnAddPlaygrounds_Click"></Button>
+                <Button x:Name="btnClear" Content="Tyhjennä kentät" Margin="4" Click="btnClear_Click"></Button>
+                <Button x:Name="btnDelPlayground" Content="Poista kohde" Margin=" 4" Click="btnDelPlayground_Click"></Button>
+                <Button x:Name="btnModify" Content="Tallenna muutokset" Margin=" 4" Click="btnModify_Click"></Button>
                 <TextBlock  Margin="5">Osoite:</TextBlock>
                 <TextBox x:Name="txtAddress"  Margin="5" TextWrapping="Wrap"></TextBox>
                 <TextBlock  Margin="5">Info:</TextBlock>
@@ -60,9 +60,9 @@
                 <StackPanel Background="LightGray" Width="210">
                     <Button x:Name="btnAddFault" Content="Lisää vika" Margin=" 5" Click="btnAddFault_Click"></Button>
                     <Button x:Name="btnDelFault" Content="Poista valittu vika" Margin=" 5" Click="btnDelFault_Click"></Button>
-                    <TextBlock  Margin="5">Vika:</TextBlock>
+                    <TextBlock  Margin="5">Vian kuvaus:</TextBlock>
                     <TextBox x:Name="txtFault"  Margin="5"></TextBox>
-                    <TextBlock  Margin="5">Vikaluokka:</TextBlock>
+                    <TextBlock  Margin="5">Vikaluokka A-D tai X:</TextBlock>
                     <TextBox x:Name="txtFaultClass" MaxLength="1" CharacterCasing="Upper" Margin="5"></TextBox>
                     <Separator BorderThickness="10" BorderBrush="Black" Margin="10"></Separator>
                     <TextBlock  Margin="5">Välineen viat:</TextBlock>
