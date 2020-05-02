@@ -60,11 +60,12 @@ josta asiakas voi tilata korjauksen, olettaen että hänellä olisi järjestelm�
 
 * Toisekseen koko järjestelmä olisi hyvä olla käytettävissä puhelimessa/tabletilla jos sitä oikeasti joskus meinaisi käyttää. 
 Ja eri käyttäjätilien mahdollistaminen olisi tottakai tarpeen, mutta ne eivät enää taida olla 
-tämän kurssin asioita. Alla vielä lopullinen luokkarakenne:
+tämän kurssin asioita.
+* Alla vielä lopullinen luokkarakenne:
 
 ![](Dokut/kuvat/Luokat.PNG)
 
-Alkuperäisestä suunnitelmasta poiketen Playgroundille piti lisätä Id tietokannan toiminnan helpottamiseksi. 
+* Alkuperäisestä suunnitelmasta poiketen Playgroundille piti lisätä Id tietokannan toiminnan helpottamiseksi. 
 Välineille ja vioille sen sijaan ei tarvittu Id:tä, koska ne ovat aina Playgroundiin liittyviä. Viat meinasin aluksi 
 tehdä pelkkinä stringeinä, mutta muutin olioiksi että sain myös vikaluokan mukaan.
 
