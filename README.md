@@ -46,6 +46,13 @@ myös luokka pitää laittaa, ja painetaan lisää vika. Poistaminen kun vika va
 ### 4. [Testidata](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Dokut%2FTietokanta) 
 * Repon Dokut/tietokanta-kansiossa, josta sen voi ladata minne haluaa ja muuttaa polun oikein käyttöliittymään.
 Oletuksena C:\Temp\Mydata. Jos ei dataa ole, sitä voi itse alkaa kirjoittamaan ja tallentaa määrittelemäänsä kohteeseen.
+* Alla vielä lopullinen luokkarakenne:
+
+![](Dokut/kuvat/Luokat.PNG)
+
+* Alkuperäisestä suunnitelmasta poiketen Playgroundille piti lisätä Id tietokannan toiminnan helpottamiseksi. 
+Välineille ja vioille sen sijaan ei tarvittu Id:tä, koska ne ovat aina Playgroundiin liittyviä. Viat meinasin aluksi 
+tehdä pelkkinä stringeinä, mutta muutin olioiksi että sain myös vikaluokan mukaan.
 
 ### 5. Ongelmat, bugit ja jatkokehitys
 
@@ -61,13 +68,7 @@ josta asiakas voi tilata korjauksen, olettaen että hänellä olisi järjestelm�
 * Toisekseen koko järjestelmä olisi hyvä olla käytettävissä puhelimessa/tabletilla jos sitä oikeasti joskus meinaisi käyttää. 
 Ja eri käyttäjätilien mahdollistaminen olisi tottakai tarpeen, mutta ne eivät enää taida olla 
 tämän kurssin asioita.
-* Alla vielä lopullinen luokkarakenne:
 
-![](Dokut/kuvat/Luokat.PNG)
-
-* Alkuperäisestä suunnitelmasta poiketen Playgroundille piti lisätä Id tietokannan toiminnan helpottamiseksi. 
-Välineille ja vioille sen sijaan ei tarvittu Id:tä, koska ne ovat aina Playgroundiin liittyviä. Viat meinasin aluksi 
-tehdä pelkkinä stringeinä, mutta muutin olioiksi että sain myös vikaluokan mukaan.
 
 ### 6. Mitä opittu, suurimmat haasteet, mitä kannattaisi opiskella lisää
 
