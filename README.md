@@ -1,5 +1,7 @@
 Leikkipaikkatietokanta
 
+[Suunnitelma](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/blob/master/Dokut/Suunnitelma.md)
+
 [Koodi](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Leikkipaikat)
 
 [Dokumentit](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Dokut)
@@ -30,7 +32,7 @@ tiedot kenttiin ja sitten lisää-nappia. Poistaminen kun väline on valittuna.
 	Ylläolevalla periaatteella toimii myös vian lisäys, eli väline pitää olla valittuna, ja sitten laitetaan uniikki vian nimi,
 myös luokka pitää laittaa, ja painetaan lisää vika. Poistaminen kun vika valittuna. Vikaluokka on yksi iso kirjain.
 
-4. Testidata repon Dokut/tietokanta-kansiossa, josta sen voi ladata minne haluaa ja muuttaa polun oikein käyttöliittymään.
+4. [Testidata](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Dokut%2FTietokanta) repon Dokut/tietokanta-kansiossa, josta sen voi ladata minne haluaa ja muuttaa polun oikein käyttöliittymään.
 Oletuksena C:\Temp\Mydata. Jos ei dataa ole, sitä voi itse alkaa kirjoittamaan ja tallentaa määrittelemäänsä kohteeseen.
 
 5. Ongelmat, bugit ja jatkokehitys:
