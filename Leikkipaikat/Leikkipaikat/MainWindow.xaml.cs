@@ -102,17 +102,22 @@ namespace Leikkipaikat
             try
             {
                 //Muokataan valittua kohdetta, tiedot osoite- ja info kentistä, lopussa päivitetään.
-                if (dgPlaygrounds.SelectedItem != null)
+                //varmistetaan että muutoksia on tapahtunut 
+                if (dgPlaygrounds.SelectedItem != null && txtInfo.Text != "" && txtAddress.Text!="")
                 { 
                 Playground selected = (Playground)dgPlaygrounds.SelectedItem;
                 string address = txtAddress.Text;
-                string info = txtInfo.Text;
-                Leikkipaikat.DB.UpdatePlayground(selected, address, info, polku);
-
-                dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds(polku);
-                    MessageBox.Show("Muokattu");
+                    if (txtInfo.Text != "Tuplaklikkaa tätä muokataksesi tietoja")
+                    {
+                        string info = txtInfo.Text;
+                        Leikkipaikat.DB.UpdatePlayground(selected, address, info, polku);
+                        dgPlaygrounds.ItemsSource = Leikkipaikat.DB.GetPlaygrounds(polku);
+                        MessageBox.Show("Muokattu");
+                    }
+                    else { MessageBox.Show("infoa ei muokattu"); }
+                    
                 }
-                else { MessageBox.Show("Valinta puuttuu"); }
+                else { MessageBox.Show("Valinta tai teksti puuttuu"); }
             }
             catch (Exception ex)
             {
@@ -154,7 +159,7 @@ namespace Leikkipaikat
                     if (chosen != null)//Tämä lienee turhaa toistoa?
                     {
                         txtAddress.Text = chosen.Address;
-                        txtInfo.Text = "Tuplaklikkaa tätä muokataksesi infoa";
+                        txtInfo.Text = "Tuplaklikkaa tätä muokataksesi tietoja";
 
                         dgEquipment.ItemsSource = Leikkipaikat.DB.GetEquipment(chosen, polku);
                         lbFaults.ItemsSource = null;
