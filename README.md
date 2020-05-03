@@ -6,7 +6,7 @@
 
 * [Dokumentit](https://gitlab.labranet.jamk.fi/N3998/klohjelmointi_harjoitust./-/tree/master/Dokut)
 
-* [Video]()
+* [Video](https://student.labranet.jamk.fi/~N3998/k%C3%A4ytt%C3%B6liittym%C3%A4t/Leikkipaikka_tietokanta.mp4)
 
 
 ### 1. Asennus
